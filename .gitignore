@@ -1,0 +1,75 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime files
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Build folders
+dist/
+build/
+.next/
+out/
+
+# Cache
+.cache/
+.parcel-cache/
+.vite/
+
+# Coverage
+coverage/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Temporary files
+tmp/
+temp/
+
+# Uploads (if storing locally)
+uploads/
+public/uploads/
+
+# Database files (if using local DB)
+*.sqlite
+*.db
+
+# MongoDB local files
+data/db/
+
+# Generated files
+*.tgz
+
+# Firebase
+.firebase/
+
+# Docker
+.docker/
+
+# ESLint cache
+.eslintcache
+
+# TypeScript
+*.tsbuildinfo
