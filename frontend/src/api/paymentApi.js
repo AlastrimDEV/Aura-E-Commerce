@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api/payments';
+const API_URL = `${process.env.BACKEND_URL}/api/payments`;
 
 const getAuthHeaders = () => {
   const storedUser = localStorage.getItem("userInfo");
