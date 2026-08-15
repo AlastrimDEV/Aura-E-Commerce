@@ -31,8 +31,8 @@ const initiateEsewaPayment = async (req, res) => {
             productCode
         );
 
-        const successUrl = redirectUrl || `http://localhost:5173/order-success/${orderId}`;
-        const failureUrl = `http://localhost:5173/checkout`;
+        const successUrl = redirectUrl || `${process.env.FRONTEND_URL}/order-success/${orderId}`;
+        const failureUrl = `${process.env.FRONTEND_URL}/checkout`;
 
         const esewaPayload = {
             amount: totalAmountStr,
