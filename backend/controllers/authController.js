@@ -31,9 +31,9 @@ const registerUser = async (req, res) => {
             user.otpSentAt = Date.now()
             await user.save();
 
-            const message = `Your OTP for STITCH registration is ${otp} . It will expire in 10 minutes.`;
+            const message = `Your OTP for AURA registration is ${otp} . It will expire in 10 minutes.`;
 
-            await sendEmail(email, "STITCH OTP Verification", message);
+            await sendEmail(email, "AURA OTP Verification", message);
             
             res.status(201).json({
                 _id: user._id,
@@ -99,9 +99,9 @@ const resendOtp = async(req, res)=>{
     user.otpSentAt = Date.now();
     await user.save();
 
-    const message = `Your new OTP for STITCH registration is ${otp} . It will expire in 10 minutes.`;
+    const message = `Your new OTP for AURA registration is ${otp} . It will expire in 10 minutes.`;
 
-    await sendEmail(email, "STITCH OTP Verification", message);
+    await sendEmail(email, "AURA OTP Verification", message);
 
     res.status(200).json({
         message: "OTP sent successfully"

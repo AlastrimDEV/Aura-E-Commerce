@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Logo from './Logo';
 
 const Footer = () => {
   return (
@@ -11,11 +12,9 @@ const Footer = () => {
 
           {/* Brand */}
           <div>
-            <h2 className="text-2xl font-bold tracking-widest">
-              STITCH
-            </h2>
+            <Logo className="h-7 mb-4" />
 
-            <p className="text-gray-500 mt-4 text-sm leading-7">
+            <p className="text-gray-500 text-sm leading-7">
               Minimal fashion for everyday life.
               Designed with simplicity and timeless style.
             </p>
@@ -23,11 +22,11 @@ const Footer = () => {
 
           {/* Shop */}
           <div>
-            <h3 className="font-semibold uppercase tracking-wider mb-4">
+            <h3 className="font-semibold uppercase tracking-wide mb-4 text-xs">
               Shop
             </h3>
 
-            <ul className="space-y-3 text-gray-600">
+            <ul className="space-y-3 text-gray-600 text-sm">
               <li><Link to="/shop">All Products</Link></li>
               <li><Link to="/shop">Men</Link></li>
               <li><Link to="/shop">Women</Link></li>
@@ -37,11 +36,11 @@ const Footer = () => {
 
           {/* Company */}
           <div>
-            <h3 className="font-semibold uppercase tracking-wider mb-4">
+            <h3 className="font-semibold uppercase tracking-wide mb-4 text-xs">
               Company
             </h3>
 
-            <ul className="space-y-3 text-gray-600">
+            <ul className="space-y-3 text-gray-600 text-sm">
               <li><Link to="/about-us">About Us</Link></li>
               <li><Link to="/contact">Contact</Link></li>
               <li><Link to="/privacy">Privacy Policy</Link></li>
@@ -51,7 +50,7 @@ const Footer = () => {
 
           {/* Newsletter */}
           <div>
-            <h3 className="font-semibold uppercase tracking-wider mb-4">
+            <h3 className="font-semibold uppercase tracking-wide mb-4 text-xs">
               Newsletter
             </h3>
 
@@ -59,14 +58,14 @@ const Footer = () => {
               Get updates on new collections and exclusive offers.
             </p>
 
-            <div className="flex border">
+            <div className="flex border border-stone-300 rounded-xs overflow-hidden">
               <input
                 type="email"
                 placeholder="Email address"
-                className="flex-1 px-4 py-3 outline-none"
+                className="flex-1 px-4 py-3 outline-none text-sm"
               />
 
-              <button className="px-5 border-l hover:bg-black hover:text-white transition">
+              <button className="px-5 border-l hover:bg-black hover:text-white transition text-xs uppercase font-medium">
                 Join
               </button>
             </div>
@@ -76,7 +75,7 @@ const Footer = () => {
 
         {/* Bottom */}
         <div className="border-t mt-16 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
-          <p>© 2026 STITCH. All rights reserved.</p>
+          <p>© 2026 AURA. All rights reserved.</p>
 
           <div className="flex gap-6 mt-4 md:mt-0">
             <a href="#">Instagram</a>

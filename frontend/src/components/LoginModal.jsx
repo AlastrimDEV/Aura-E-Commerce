@@ -2,8 +2,7 @@ import React, { useContext, useState } from 'react';
 import { loginUser, registerUser } from '../api/authApi';
 import VerifyOtpModal from './VerifyOtpModal';
 import { AuthContext } from '../context/AuthContext';
-
-
+import Logo from './Logo';
 
 const LoginModal = ({ onClose }) => {
     
@@ -76,20 +75,20 @@ const LoginModal = ({ onClose }) => {
     <>
       <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-[100] px-4">
 
-        <div className="bg-white w-full max-w-md p-10 shadow-xl relative">
+        <div className="bg-white w-full max-w-md p-10 shadow-xl relative rounded-xs">
 
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 text-2xl"
+            className="absolute top-4 right-4 text-2xl text-neutral-400 hover:text-neutral-900"
           >
             ×
           </button>
 
-          <h1 className="text-4xl font-bold text-center mb-2">
-            STITCH
-          </h1>
+          <div className="flex justify-center mb-3">
+            <Logo className="h-8" />
+          </div>
 
-          <p className="text-center text-gray-500 mb-8">
+          <p className="text-center text-gray-500 mb-8 text-sm">
             {isLogin
               ? 'Welcome back'
               : 'Create your account'}
@@ -106,7 +105,7 @@ const LoginModal = ({ onClose }) => {
                 placeholder="Full Name"
                 value={formData.name}
                 onChange={handleChange}
-                className="w-full border p-4 outline-none"
+                className="w-full border border-stone-200 p-4 outline-none text-sm focus:border-black"
               />
             )}
 
@@ -116,7 +115,7 @@ const LoginModal = ({ onClose }) => {
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full border p-4 outline-none"
+              className="w-full border border-stone-200 p-4 outline-none text-sm focus:border-black"
             />
 
             <input
@@ -125,12 +124,12 @@ const LoginModal = ({ onClose }) => {
               placeholder="Password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full border p-4 outline-none"
+              className="w-full border border-stone-200 p-4 outline-none text-sm focus:border-black"
             />
 
             <button
               type="submit"
-              className="w-full bg-black text-white py-4 uppercase tracking-widest hover:bg-gray-800 transition"
+              className="w-full bg-black text-white py-4 uppercase text-xs font-semibold tracking-wide hover:bg-neutral-800 transition"
             >
               {isLogin ? 'Sign In' : 'Create Account'}
             </button>

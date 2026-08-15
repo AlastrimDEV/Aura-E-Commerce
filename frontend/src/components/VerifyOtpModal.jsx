@@ -76,7 +76,7 @@ const VerifyOtpModal = ({ email, onClose, onVerified }) => {
         <button
           onClick={handleVerify}
           disabled={loading}
-          className="w-full bg-black text-white py-4 mt-4 uppercase tracking-widest hover:bg-gray-800 transition disabled:opacity-50"
+          className="w-full bg-black text-white py-4 mt-4 uppercase text-xs font-semibold tracking-wide hover:bg-neutral-800 transition disabled:opacity-50"
         >
           {loading ? "Verifying..." : "Verify OTP"}
         </button>

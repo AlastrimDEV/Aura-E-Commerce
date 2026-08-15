@@ -1,16 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import BlackIcon from '../assets/iconblack.png';
-import WhiteIcon from '../assets/iconwhite.png';
-import { Handbag } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from 'react';
+import Logo from './Logo';
+import { Handbag, User, LogOut, Package, Shield } from 'lucide-react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import LoginModal from '../components/LoginModal';
+import CartDrawer from '../components/CartDrawer';
+import { AuthContext } from '../context/AuthContext';
+import { CartContext } from '../context/CartContext';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [userDropdown, setUserDropdown] = useState(false);
+
+  const { user, logout } = useContext(AuthContext);
+  const { totalCount, setIsCartOpen } = useContext(CartContext);
 
   const location = useLocation();
-  const isHome = location.pathname === ("/");
+  const navigate = useNavigate();
+  const isHome = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,56 +25,135 @@ const Navbar = () => {
     };
 
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   const navbarStyle =
-  isHome && !scrolled
-    ? 'bg-transparent text-white'
-    : 'bg-white text-black shadow-sm';
+    isHome && !scrolled
+      ? 'bg-transparent text-white'
+      : 'bg-white/90 backdrop-blur-md text-black shadow-xs';
 
   return (
     <>
-    <div
-      className={`
-        fixed top-0 left-0 w-full z-50 transition-all duration-300
-        ${navbarStyle}
-      `}
-    >
-      <nav className="grid grid-cols-3 items-center px-8 py-5">
-        {/* Left Menu */}
-        <ul className="flex items-center gap-6">
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/shop">Shop</Link></li>
-          <li><Link to="/about-us">About Us</Link></li>
-        </ul>
+      <div
+        className={`
+          fixed top-0 left-0 w-full z-40 transition-all duration-300
+          ${navbarStyle}
+        `}
+      >
+        <nav className="grid grid-cols-3 items-center px-8 py-4">
+          {/* Left Menu */}
+          <ul className="flex items-center gap-8 text-xs uppercase tracking-wide font-medium">
+            <li>
+              <Link to="/" className="hover:opacity-75 transition-opacity">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/shop" className="hover:opacity-75 transition-opacity">
+                Shop
+              </Link>
+            </li>
+            <li>
+              <Link to="/about-us" className="hover:opacity-75 transition-opacity">
+                About
+              </Link>
+            </li>
+          </ul>
 
-        {/* Logo */}
-        <div className="mid flex justify-center">
-        <Link to="/">
-            <img src={isHome && !scrolled ? WhiteIcon : BlackIcon} alt="Logo" className="h-12" />
-        </Link>
-        </div>
+          {/* Logo */}
+          <div className="mid flex justify-center">
+            <Link to="/" aria-label="Aura Home">
+              <Logo isLight={isHome && !scrolled} />
+            </Link>
+          </div>
 
-        {/* Right Menu */}
-        <ul className="flex justify-end gap-6">
-          <li>
-          <button onClick={() => setShowLogin(true)}>
-            Login
-          </button>
-          </li>
-          <li><Link to="/cart"><Handbag /></Link></li>
-        </ul>
-      </nav>
-    </div>
-    {showLogin && (
-      <LoginModal
-        onClose={() => setShowLogin(false)}
-      />
-    )}
+          {/* Right Menu */}
+          <div className="flex justify-end items-center gap-6 text-xs uppercase tracking-wide">
+            {user ? (
+              <div className="relative">
+                <button
+                  onClick={() => setUserDropdown(!userDropdown)}
+                  className="flex items-center gap-2 font-medium hover:opacity-75 transition-opacity py-2"
+                >
+                  <User className="w-4 h-4" />
+                  <span className="hidden md:inline">{user.name}</span>
+                </button>
+
+                {userDropdown && (
+                  <div 
+                    className="absolute right-0 mt-2 w-48 bg-white text-neutral-900 rounded-xs shadow-xl border border-neutral-100 py-2 z-50 animate-fade-in"
+                    onMouseLeave={() => setUserDropdown(false)}
+                  >
+                    <div className="px-4 py-2 border-b border-stone-100 text-xs">
+                      <p className="font-semibold">{user.name}</p>
+                      <p className="text-[10px] text-stone-400 lowercase">{user.email}</p>
+                    </div>
+
+                    <Link
+                      to="/orders"
+                      onClick={() => setUserDropdown(false)}
+                      className="flex items-center gap-2 px-4 py-2.5 text-xs text-neutral-700 hover:bg-stone-50 transition-colors"
+                    >
+                      <Package className="w-4 h-4 text-neutral-500" />
+                      <span>My Orders</span>
+                    </Link>
+
+                    {user.role === 'admin' && (
+                      <Link
+                        to="/admin"
+                        onClick={() => setUserDropdown(false)}
+                        className="flex items-center gap-2 px-4 py-2.5 text-xs text-neutral-700 hover:bg-stone-50 transition-colors"
+                      >
+                        <Shield className="w-4 h-4 text-amber-600" />
+                        <span>Admin Panel</span>
+                      </Link>
+                    )}
+
+                    <button
+                      onClick={() => {
+                        setUserDropdown(false);
+                        logout();
+                        navigate('/');
+                      }}
+                      className="w-full flex items-center gap-2 px-4 py-2.5 text-xs text-red-600 hover:bg-red-50 transition-colors text-left border-t border-stone-100"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      <span>Sign Out</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <button
+                onClick={() => setShowLogin(true)}
+                className="font-medium hover:opacity-75 transition-opacity"
+              >
+                Sign In
+              </button>
+            )}
+
+            {/* Shopping Bag Button */}
+            <button
+              onClick={() => setIsCartOpen(true)}
+              className="relative p-1 hover:opacity-75 transition-opacity"
+              aria-label="Shopping Bag"
+            >
+              <Handbag className="w-5 h-5" />
+              {totalCount > 0 && (
+                <span className="absolute -top-1.5 -right-2 bg-black text-white text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-white">
+                  {totalCount}
+                </span>
+              )}
+            </button>
+          </div>
+        </nav>
+      </div>
+
+      {showLogin && <LoginModal onClose={() => setShowLogin(false)} />}
+      <CartDrawer />
     </>
   );
 };
