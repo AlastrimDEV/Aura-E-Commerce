@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = "${process.env.BACKEND_URL}/api"
+const API_URL = `${import.meta.env.VITE_BACKEND_URL}/api`
 
 export const getProducts = async()=>{
     const { data } = await axios.get(

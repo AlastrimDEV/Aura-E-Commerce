@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE = `${process.env.BACKEND_URL}/api`;
+const API_BASE = `${import.meta.env.VITE_BACKEND_URL}/api`;
 
 const getAuthHeaders = () => {
   const storedUser = localStorage.getItem("userInfo");
