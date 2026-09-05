@@ -43,9 +43,9 @@ const Navbar = () => {
           ${navbarStyle}
         `}
       >
-        <nav className="grid grid-cols-3 items-center px-8 py-4">
+        <nav className="site-nav grid grid-cols-3 items-center px-8 py-4">
           {/* Left Menu */}
-          <ul className="flex items-center gap-8 text-xs uppercase tracking-wide font-medium">
+          <ul className="site-nav-links flex items-center gap-8 text-xs uppercase tracking-wide font-medium">
             <li>
               <Link to="/" className="hover:opacity-75 transition-opacity">
                 Home
@@ -64,14 +64,14 @@ const Navbar = () => {
           </ul>
 
           {/* Logo */}
-          <div className="mid flex justify-center">
+          <div className="site-nav-logo mid flex justify-center">
             <Link to="/" aria-label="Aura Home">
               <Logo isLight={isHome && !scrolled} />
             </Link>
           </div>
 
           {/* Right Menu */}
-          <div className="flex justify-end items-center gap-6 text-xs uppercase tracking-wide">
+          <div className="site-nav-actions flex justify-end items-center gap-6 text-xs uppercase tracking-wide">
             {user ? (
               <div className="relative">
                 <button
@@ -131,7 +131,7 @@ const Navbar = () => {
                 onClick={() => setShowLogin(true)}
                 className="font-medium hover:opacity-75 transition-opacity"
               >
-                Sign In
+                <span className="site-nav-sign-in-label">Sign In</span>
               </button>
             )}
 
